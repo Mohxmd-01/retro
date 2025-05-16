@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <link rel="stylesheet" href="transition.css"> 
+    <script src="transition.js" defer></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+            background: url('images/loginbg.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .container {
+            max-width: 500px;
+            background: url('images/loginformbg.png') no-repeat center center;
+            background-size: cover;
+            border-radius: 40px;
+            padding: 50px;
+            box-shadow: rgba(133, 189, 215, 0.878) 0px 30px 30px -20px;
+            text-align: center;
+        }
+        .input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 20px;
+            margin: 10px 0;
+            border: 2px solid #ccc;
+            font-size: 16px;
+            color: #9AA1BE;
+        }
+        .login-button {
+            width: 70%;
+            padding: 12px;
+            border-radius: 20px;
+            background-color: #FFFFFF;
+            color: #9BA4BC;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+ .login-button:hover {
+            background-color: #FFFFFF;
+        }
+        .hidden {
+            display: none;
+        }
+        p {
+            color: #9AA1BE;
+        }
+        a {
+            text-decoration: none;
+            color: #9AA1BE;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <section id="main-content">
+        <div class="container" id="loginFormContainer">
+            <h2>LOGIN</h2>
+            <form id="loginForm">
+                <input required class="input" id="loginEmail" type="email" placeholder="E-mail">
+                <input required class="input" id="loginPassword" type="password" placeholder="Password">
+                <input class="login-button" type="submit" value="Log in">
+            </form>
+            <p><a href="#" id="forgotPassword">Forgot Password?</a></p>
+            <p>Don't have an account? <a href="#" id="showSignUpForm">Sign up</a></p>
+            <div id="g_id_signin"></div>
+        </div>
+        
+        <div class="container hidden" id="forgotPasswordContainer">
+            <h2>Reset Password</h2>
+            <form id="resetForm">
+                <input required class="input" id="resetPhone" type="tel" placeholder="Enter Registered Mobile Number">
+                <input class="login-button" type="button" value="Send OTP" id="sendOTP">
+                <div id="otpSection" class="hidden">
+                    <input required class="input" id="otpCode" type="text" placeholder="Enter OTP">
+                    <input required class="input" id="newPassword" type="password" placeholder="New Password">
+                    <input class="login-button" type="button" value="Done" id="verifyOTP">
+                </div>
+            </form>
+            <p><a href="#" id="showLoginForm">Back to Login</a></p>
+        </div>
+        
+        <div class="container hidden" id="signUpFormContainer">
+            <h2>Sign Up</h2>
+            <form id="signUpForm">
+                <input required class="input" id="signupName" type="text" placeholder="Full Name">
+                <input required class="input" id="signupPhone" type="tel" placeholder="Phone Number">
+                <input required class="input" id="signupEmail" type="email" placeholder="E-mail">
+                <input required class="input" id="signupPassword" type="password" placeholder="Password">
+                <input required class="input" id="confirmPassword" type="password" placeholder="Confirm Password">
+                <input class="login-button" type="submit" value="Sign Up">
+            </form>
+            <p>Already have an account? <a href="login.html">Log in</a></p>    
+        </div>
+    </section>
+    
+    
+    <script>
+        document.getElementById("forgotPassword").addEventListener("click", function(event) {
+            event.preventDefault();
+            document.getElementById("loginFormContainer").classList.add("hidden");
+            document.getElementById("forgotPasswordContainer").classList.remove("hidden");
+        });
+        
+        document.getElementById("sendOTP").addEventListener("click", async function() {
+            const phone = document.getElementById("resetPhone").value;
+            if (!phone) { alert("Enter your registered mobile number"); return; }
+            document.getElementById("otpSection").classList.remove("hidden");
+            alert("OTP sent!"); // Simulate OTP sent
+        });
+        
+        document.getElementById("verifyOTP").addEventListener("click", async function() {
+            alert("Password reset successful! You can now log in.");
+            window.location.href = "login.html";
+        });
+        document.getElementById('showSignUpForm').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('loginFormContainer').classList.add('hidden');
+            document.getElementById('signUpFormContainer').classList.remove('hidden');
+        });
+
+        document.getElementById('signUpForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const phone = document.getElementById('signupPhone').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+             alert("Passwords do not match!");
+            return;
+            }
+            const response = await fetch('http://localhost:5000/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, phone, email, password })
+            });
+            const data = await response.json();
+            if (response.ok) {
+                alert(data.message);
+                window.location.href = "index.html";
+            } else {
+                alert(data.error);
+            }
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            const response = await fetch('http://localhost:5000/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            const data = await response.json();
+            if (response.ok) {
+                localStorage.setItem('token', data.token);
+                window.location.href = "index.html";
+            } else {
+                alert(data.error);
+            }
+        });
+
+        window.onload = function () {
+            google.accounts.id.initialize({
+                client_id: "YOUR_GOOGLE_CLIENT_ID",
+                callback: function(response) {
+                    console.log("Google Sign-In Success", response.credential);
+                    window.location.href = "index.html";
+                }
+            });
+            google.accounts.id.renderButton(
+                document.getElementById("g_id_signin"),
+                { theme: "outline", size: "large" }
+            );
+            google.accounts.id.prompt();
+        };
+    </script>
+</body>
+</html>

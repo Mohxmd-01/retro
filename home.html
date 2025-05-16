@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HerdMedics - Diagnosis Portal</title>
+    <link rel="stylesheet" href="transition.css"> 
+    <script src="transition.js" defer></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Manrope', sans-serif;
+            background: url('https://c4.wallpaperflare.com/wallpaper/846/674/565/car-white-car-mercedes-benz-300sl-vehicle-wallpaper-preview.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 97.5%;
+            padding: 15px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .logo-section img {
+            width: 200px;
+            height: 250px;
+        }
+
+        /* Hero Section */
+        .hero-content {
+            position: absolute;
+            left: 19%;
+            top: 165%;
+            transform: translateY(-50%);
+            max-width: 1500px;
+            text-align: left;
+        }
+
+        .hero-title {
+            font-size: 60px;
+            max-width: 1300px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #FFFFFF, #9B6EF3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 72px;
+        }
+
+        .hero-box {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .hero-subtitle {
+            font-size: 29px;
+            font-weight: 500;
+            background: linear-gradient(90deg, , #D4A5F4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            line-height: 36px;
+            margin: 0 auto;
+            max-width: 800px;
+            text-align: justify;
+        }
+
+        /* Know More Button */
+        .know-more-btn {
+            display: block;
+            margin: 30px auto;
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            
+            background: #020519;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .know-more-btn:hover {
+            background: #545458;
+        }
+
+        /* Navigation */
+        nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-item, .know-more-btn {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border: none; /* Removes any border */
+    background: none; /* Ensures no background */
+    color: white;
+}
+
+.nav-item:hover, .know-more-btn:hover {
+    transform: translate(2px, 2px);
+}
+
+        /* Know More Button */
+        .know-more-btn {
+            display: block;
+            margin: 30px auto;
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            
+            background: #020519;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .know-more-btn:hover {
+            background: #545458;
+        }
+
+        /* Image Section */
+        #more-content {
+            margin-top: 25vh; /* Pushes image further down initially */
+            text-align: center;
+            opacity: 1;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+        }
+
+        .know-more-image img {
+            width: 120%;
+            max-width: 1000px;
+             height: 600px;  /* Increase height */
+            object-fit: contain; 
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .show {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        /* Image Section */
+        #more-content1 {
+            margin-top: 30vh; /* Pushes image further down initially */
+            text-align: center;
+            opacity: 1;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+        }
+
+        .know-image img {
+            width: 290%;
+            max-width: 1000px;
+            height: 600px;  /* Increase height */
+            object-fit: cover; 
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .show1 {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        /* Chat Button (Bottom-Right Corner) */
+/* Chat Button (Bottom-Right Corner) */
+
+/* Chatbot Container */
+.chat-container {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 350px;
+    height: 500px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    display: none; /* Hidden by default */
+    overflow: hidden;
+    z-index: 1001;
+}
+
+/* Chatbot Iframe */
+.chat-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Translucent Background Effect */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Dark translucent effect */
+    backdrop-filter: blur(5px); /* Blur effect */
+    display: none; /* Hidden by default */
+    z-index: 1000;
+}
+body.no-scroll {
+    overflow: hidden;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-section">
+            <img src="images/logo (1).png" alt="Logo">
+            <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+
+        </div>
+
+       
+        
+        <nav>
+            <div class="nav-links">
+                <button class="nav-item" onclick="window.location.href='home.html'">Home</button>
+                <button class="nav-item" onclick="window.location.href='car gallery.html'">car gallery</button>
+                <button class="nav-item" onclick="window.location.href='shop now.html'">shop now</button>
+                <button class="nav-item" onclick="window.location.href='about us.html'">about us</button>
+            </div>
+        </nav>
+
+    </header>
+    
+<script>
+    function toggleChat() {
+        var chatbox = document.getElementById("chatbox");
+        var overlay = document.getElementById("overlay");
+        var body = document.body;
+
+        if (chatbox.style.display === "none" || chatbox.style.display === "") {
+            chatbox.style.display = "block";
+            overlay.style.display = "block"; // Show translucent effect
+            body.classList.add("no-scroll"); // Disable scrolling on home page
+        } else {
+            chatbox.style.display = "none";
+            overlay.style.display = "none"; // Remove translucent effect
+            body.classList.remove("no-scroll"); // Enable scrolling on home page
+        }
+    }
+
+    // Close chat when clicking outside & enable interaction back
+    document.getElementById("overlay").addEventListener("click", function() {
+        document.getElementById("chatbox").style.display = "none";
+        document.getElementById("overlay").style.display = "none";
+        document.body.classList.remove("no-scroll");
+    });
+</script>
+</body>
+</html>

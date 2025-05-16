@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HerdMedics - Diagnosis Portal</title>
+    <link rel="stylesheet" href="transition.css"> 
+    <script src="transition.js" defer></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Manrope', sans-serif;
+            background: url('https://c4.wallpaperflare.com/wallpaper/846/674/565/car-white-car-mercedes-benz-300sl-vehicle-wallpaper-preview.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 97.5%;
+            padding: 15px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .logo-section img {
+            width: 200px;
+            height: 250px;
+        }
+
+        /* Hero Section */
+        .hero-content {
+            position: absolute;
+            left: 19%;
+            top: 165%;
+            transform: translateY(-50%);
+            max-width: 100%;
+            text-align: left;
+            overflow: hidden;
+
+        }
+
+        .hero-title {
+            font-size: 60px;
+            max-width: 1000px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #FFFFFF, #9B6EF3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 72px;
+        }
+
+        .hero-box {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .hero-subtitle {
+            font-size: 29px;
+            font-weight: 500;
+            background: linear-gradient(90deg, , #D4A5F4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            line-height: 36px;
+            margin: 0 auto;
+            max-width: 800px;
+            text-align: justify;
+        }
+
+        /* Know More Button */
+        .know-more-btn {
+            display: block;
+            margin: 30px auto;
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            
+            background: #020519;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .know-more-btn:hover {
+            background: #545458;
+        }
+
+        /* Navigation */
+        nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-item, .know-more-btn {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border: none; /* Removes any border */
+    background: none; /* Ensures no background */
+    color: white;
+}
+
+.nav-item:hover, .know-more-btn:hover {
+    transform: translate(2px, 2px);
+}
+
+        /* Know More Button */
+        .know-more-btn {
+            display: block;
+            margin: 30px auto;
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            
+            background: #020519;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .know-more-btn:hover {
+            background: #545458;
+        }
+
+        /* Image Section */
+        #more-content {
+            margin-top: 25vh; /* Pushes image further down initially */
+            text-align: center;
+            opacity: 1;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+        }
+
+        .know-more-image img {
+            width: 100%;
+            max-width: 1000px;
+             height:auto; /* Increase height */
+            object-fit: contain; 
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .show {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        /* Image Section */
+        #more-content1 {
+            margin-top: 30vh; /* Pushes image further down initially */
+            text-align: center;
+            opacity: 1;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+        }
+
+        .know-image img {
+            width: 290%;
+            max-width: 1000px;
+            height: 600px;  /* Increase height */
+            object-fit: cover; 
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .show1 {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        /* Chat Button (Bottom-Right Corner) */
+/* Chat Button (Bottom-Right Corner) */
+
+/* Chatbot iframe styles */
+.chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            display: none; /* Initially hidden */
+        }
+
+        .chatbot-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+
+        /* Minimize/Maximize Button */
+        .chatbot-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #000000;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Custom Close Button inside Chatbot */
+        .chatbot-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff5c5c;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+/* Translucent Background Effect */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Dark translucent effect */
+    backdrop-filter: blur(5px); /* Blur effect */
+    display: none; /* Hidden by default */
+    z-index: 1000;
+}
+body.no-scroll {
+    overflow: hidden;
+}
+
+        /* Car Gallery Section */
+        /* Move Car Gallery Down */
+.car-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 200vh; /* Move it further down */
+    padding: 50px;
+    background: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    text-align: center;
+}
+
+
+        .car-gallery img {
+            width: 300px;
+            height: 200px;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .car-gallery img:hover {
+            transform: scale(1.1);
+        }
+        #car-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 449vh;
+    padding: 50px;
+    background: rgba(0, 0, 0, 0.8);
+    width: 100%;
+}
+
+.car-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    max-width: 1200px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.car-item img {
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.car-description {
+    width: 50%;
+    font-size: 18px;
+    font-family: poppins;
+    color: white;
+    text-align: justify;
+    padding: 0 20px;
+}
+
+/* Apply specific order */
+.car-item:nth-child(4) {
+    flex-direction: row-reverse;
+}   .shop-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 columns */
+            gap: 20px;
+            padding: 40px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Individual Shop Items */
+        .shop-item {
+            position: relative;
+            width: 350px;
+            height: 250px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Image Styling */
+        .shop-item img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* Button Styling */
+        .shop-now {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ff6600;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            opacity: 0; /* Initially hidden */
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* Hover Effect - Image Becomes Translucent & Button Appears */
+        .shop-item:hover img {
+            opacity: 0.5;
+        }
+
+        .shop-item:hover .shop-now {
+            opacity: 1;
+        }
+
+        /* Car Description */
+        .car-description {
+            margin-top: 10px;
+            font-size: 18px;
+            font-family: Poppins, sans-serif;
+            color: black;
+            text-align: center;
+            max-width: 350px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="shop-container">
+        <div class="shop-item">
+            <img src="car1.jpg" alt="Car 1">
+            <button class="shop-now">Shop Now</button>
+        </div>
+        <div class="shop-item">
+            <img src="car2.jpg" alt="Car 2">
+            <button class="shop-now">Shop Now</button>
+        </div>
+        <div class="shop-item">
+            <img src="car3.jpg" alt="Car 3">
+            <button class="shop-now">Shop Now</button>
+        </div>
+        <div class="shop-item">
+            <img src="car4.jpg" alt="Car 4">
+            <button class="shop-now">Shop Now</button>
+        </div>
+        <div class="shop-item">
+            <img src="car5.jpg" alt="Car 5">
+            <button class="shop-now">Shop Now</button>
+        </div>
+        <div class="shop-item">
+            <img src="car6.jpg" alt="Car 6">
+            <button class="shop-now">Shop Now</button>
+        </div>
+    </div>
+    <button class="show-more" onclick="location.href='more-cars.html'">Show More</button>
+    <section id="car-gallery">
+        <div class="car-item">
+            <img src="https://i.pinimg.com/236x/43/ed/04/43ed044e63bc51957243adec85dbc288.jpg" alt="Car 1">
+            <p class="car-description">The 1957 Chevrolet Bel Air is one of the most recognizable American classic cars, known for its sleek chrome detailing, distinctive tailfins, and stylish two-tone paint jobs.</p>
+        </div>
+        <div class="car-item reverse">
+            <p class="car-description">The 1965 Ford Mustang marked the birth of the pony car, combining sports car performance with everyday usability.</p>
+            <img src="https://e0.pxfuel.com/wallpapers/838/194/desktop-wallpaper-cadillac-series-62-coupe-cars-background-and-pink-vintage-car-thumbnail.jpg " alt="Car 2">
+        </div>
+        <div class="car-item">
+            <img src="https://wallpapercave.com/wp/wp6685491.jpg" alt="Car 3">
+            <p class="car-description">The 1960s Volkswagen Beetle became a global sensation thanks to its simple design, reliability, and affordability.</p>
+        </div>
+        
+    </section>
+    <!-- Shop Now Section -->
+    <div class="shop-container">
+        <div class="shop-item">
+            <img src="https://www.topgear.com/sites/default/files/news-listicle/image/ringbrothers_1972_amc_javelin_amx_defiant_1.jpg?w=1290&h=726" alt="Retro Car 1">
+            <button class="shop-now">Shop Now</button>
+        </div>
+        <p class="car-description">1955 Mercedes-Benz 300SL - Limited Stock</p>
+
+        <div class="shop-item">
+            <img src="https://www.topgear.com/sites/default/files/news-listicle/image/07%20DSC04482.jpg?w=1290&h=726" alt="Retro Car 2">
+            <button class="shop-now">Shop Now</button>
+        </div>
+        <p class="car-description">Singer Vehicle Design - Own a Classic</p>
+
+        <div class="shop-item">
+            <img src="https://www.topgear.com/sites/default/files/news-listicle/image/icon.jpg?w=1290&h=726" alt="Retro Car 3">
+            <button class="shop-now">Shop Now</button>
+        </div>
+        <p class="car-description">Icon Bronco - High Performance</p>
+
+        <div class="shop-item">
+            <img src="https://www.topgear.com/sites/default/files/news-listicle/image/row_3155_0.jpg?w=1290&h=726" alt="Retro Car 4">
+            <button class="shop-now">Shop Now</button>
+        </div>
+        <p class="car-description">Alfaholics GTA-R 290- Muscle Car Icon</p>
+    </div>
+
+
+    
+    <header>
+        <div class="logo-section">
+            <img src="images/logo (1).png" alt="Logo">
+            <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+
+        </div>
+
+        <nav>
+            <div class="nav-links">
+                <button class="nav-item" onclick="window.location.href='index.html'">Home</button>
+               <!-- Navigation -->
+<!-- Navigation -->
+<nav>
+    <div class="nav-links">
+        <button class="nav-item" onclick="scrollToGallery()">Car Gallery</button>
+        <button class="nav-item" onclick="window.location.href='shop now.html'">Shop Now</button>
+        <button class="nav-item" onclick="window.location.href='about us.html'">About Us</button>
+    </div>
+</nav>          
+    </header>
+    
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("scroll-to-shop").addEventListener("click", function() {
+        document.getElementById("shop-now").scrollIntoView({ behavior: "smooth" });
+    });
+});
+ function scrollToShop() {
+        document.getElementById("shop-section").scrollIntoView({ behavior: "smooth" });
+    }
+    // Smooth Scroll to Car Gallery
+function scrollToGallery() {
+    document.getElementById("car-gallery").scrollIntoView({ behavior: 'smooth' });
+}
+// Chatbot toggle button and container
+const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatbotContainer = document.getElementById('chatbot-container');
+        const chatbotClose = document.getElementById('chatbot-close');
+    // Toggle chatbot visibility
+    chatbotToggle.addEventListener('click', () => {
+            chatbotContainer.style.display = chatbotContainer.style.display === 'none' ? 'block' : 'none';
+        });
+
+        // Close chatbot
+        chatbotClose.addEventListener('click', () => {
+            chatbotContainer.style.display = 'none';
+        });
+</script>
+</body>
+</html> 
